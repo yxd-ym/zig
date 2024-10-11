@@ -426,6 +426,7 @@ extern fn c_ret_struct_u32_union_u32_u32u32() Struct_u32_Union_u32_u32u32;
 extern fn c_struct_u32_union_u32_u32u32(Struct_u32_Union_u32_u32u32) void;
 
 test "C ABI struct{u32,union{u32,struct{u32,u32}}}" {
+    if (builtin.cpu.arch.isLoongArch()) return error.SkipZigTest;
     if (builtin.cpu.arch.isMIPS64()) return error.SkipZigTest;
     if (builtin.cpu.arch.isPowerPC()) return error.SkipZigTest;
 
