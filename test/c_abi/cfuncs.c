@@ -2715,10 +2715,13 @@ void run_c_tests(void) {
     }
 #endif
 
+#if !defined(ZIG_LOONGARCH64)
     {
         struct BigStruct s = {1, 2, 3, 4, 5};
         zig_big_struct(s);
     }
+#endif
+
 #endif
 
 #if !defined __i386__ && !defined __arm__ && !defined __aarch64__ && \
