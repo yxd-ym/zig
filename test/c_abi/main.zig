@@ -345,8 +345,6 @@ const Struct_f32f32_f32 = extern struct {
 };
 
 export fn zig_ret_struct_f32f32_f32() Struct_f32f32_f32 {
-    if (builtin.cpu.arch.isLoongArch()) return error.SkipZigTest;
-
     return .{ .a = .{ .b = 1.0, .c = 2.0 }, .d = 3.0 };
 }
 
@@ -361,6 +359,7 @@ extern fn c_ret_struct_f32f32_f32() Struct_f32f32_f32;
 extern fn c_struct_f32f32_f32(Struct_f32f32_f32) void;
 
 test "C ABI struct {f32,f32} f32" {
+    if (builtin.cpu.arch.isLoongArch()) return error.SkipZigTest;
     if (builtin.cpu.arch.isMIPS64()) return error.SkipZigTest;
     if (builtin.cpu.arch.isPowerPC32()) return error.SkipZigTest;
 
@@ -391,6 +390,7 @@ extern fn c_ret_struct_f32_f32f32() Struct_f32_f32f32;
 extern fn c_struct_f32_f32f32(Struct_f32_f32f32) void;
 
 test "C ABI struct f32 {f32,f32}" {
+    if (builtin.cpu.arch.isLoongArch()) return error.SkipZigTest;
     if (builtin.cpu.arch.isMIPS64()) return error.SkipZigTest;
     if (builtin.cpu.arch.isPowerPC32()) return error.SkipZigTest;
 
