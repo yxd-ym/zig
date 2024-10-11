@@ -2725,7 +2725,7 @@ void run_c_tests(void) {
 #endif
 
 #if !defined __i386__ && !defined __arm__ && !defined __aarch64__ && \
-    !defined __powerpc__ && !defined ZIG_RISCV64
+    !defined __powerpc__ && !defined ZIG_RISCV64 && !defined ZIG_LOONGARCH64
     {
         struct SmallStructInts s = {1, 2, 3, 4};
         zig_small_struct_ints(s);
@@ -2733,7 +2733,7 @@ void run_c_tests(void) {
 #endif
 
 #if !defined __arm__ && !defined __aarch64__ && \
-    !defined __powerpc__ && !defined ZIG_RISCV64
+    !defined __powerpc__ && !defined ZIG_RISCV64 && !defined ZIG_LOONGARCH64
     {
         struct MedStructInts s = {1, 2, 3};
         zig_med_struct_ints(s);
