@@ -763,6 +763,7 @@ const Vector5 = extern struct {
 extern fn c_big_struct_floats(Vector5) void;
 
 test "C ABI structs of floats as parameter" {
+    if (builtin.cpu.arch.isLoongArch()) return error.SkipZigTest;
     if (builtin.cpu.arch.isMIPS64()) return error.SkipZigTest;
     if (builtin.cpu.arch.isPowerPC()) return error.SkipZigTest;
 
