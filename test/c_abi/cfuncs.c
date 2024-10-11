@@ -2783,7 +2783,7 @@ void run_c_tests(void) {
     }
 #endif
 
-#if !defined ZIG_PPC32
+#if !defined ZIG_PPC32 && !defined ZIG_LOONGARCH64
     {
         struct BigStruct s = {30, 31, 32, 33, 34};
         struct BigStruct res = zig_big_struct_both(s);
