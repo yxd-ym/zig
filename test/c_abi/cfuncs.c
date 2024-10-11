@@ -12,6 +12,12 @@ static void assert_or_panic(bool ok) {
     }
 }
 
+#ifdef __loongarch__
+#  ifdef __loongarch_lp64
+#    define ZIG_LOONGARCH64
+#  endif
+#endif
+
 #if defined __powerpc__ && !defined _ARCH_PPC64
 #  define ZIG_PPC32
 #endif
@@ -77,6 +83,10 @@ static void assert_or_panic(bool ok) {
 #define ZIG_NO_RAW_F16
 #endif
 
+#ifdef __loongarch__
+#define ZIG_NO_RAW_F16
+#endif
+
 #ifdef __mips__
 #define ZIG_NO_RAW_F16
 #endif
@@ -98,6 +108,10 @@ static void assert_or_panic(bool ok) {
 #endif
 
 #ifdef __arm__
+#define ZIG_NO_F128
+#endif
+
+#ifdef __loongarch__
 #define ZIG_NO_F128
 #endif
 
