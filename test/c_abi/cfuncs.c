@@ -2795,7 +2795,8 @@ void run_c_tests(void) {
     }
 #endif
 
-#if !defined ZIG_PPC32 && !defined _ARCH_PPC64
+#if !defined ZIG_PPC32 && !defined _ARCH_PPC64 && \
+    !defined ZIG_LOONGARCH64
     {
         struct Rect r1 = {1, 21, 16, 4};
         struct Rect r2 = {178, 189, 21, 15};
