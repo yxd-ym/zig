@@ -575,6 +575,7 @@ extern fn c_med_struct_ints(MedStructInts) void;
 extern fn c_ret_med_struct_ints() MedStructInts;
 
 test "C ABI medium struct of ints" {
+    if (builtin.cpu.arch.isLoongArch()) return error.SkipZigTest;
     if (builtin.cpu.arch.isMIPS64()) return error.SkipZigTest;
     if (builtin.cpu.arch.isPowerPC()) return error.SkipZigTest;
 
