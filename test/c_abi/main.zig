@@ -1076,6 +1076,7 @@ extern fn c_ret_vector_2_float() Vector2Float;
 extern fn c_ret_vector_4_float() Vector4Float;
 
 test "float simd vectors" {
+    if (builtin.cpu.arch.isLoongArch()) return error.SkipZigTest;
     if (builtin.cpu.arch == .powerpc or builtin.cpu.arch == .powerpc64le) return error.SkipZigTest;
 
     {
