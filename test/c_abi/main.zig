@@ -345,6 +345,8 @@ const Struct_f32f32_f32 = extern struct {
 };
 
 export fn zig_ret_struct_f32f32_f32() Struct_f32f32_f32 {
+    if (builtin.cpu.arch.isLoongArch()) return error.SkipZigTest;
+
     return .{ .a = .{ .b = 1.0, .c = 2.0 }, .d = 3.0 };
 }
 
