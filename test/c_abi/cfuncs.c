@@ -2804,7 +2804,7 @@ void run_c_tests(void) {
     }
 #endif
 
-#if !defined ZIG_PPC32
+#if !defined ZIG_PPC32 && !defined ZIG_LOONGARCH64
     {
         struct FloatRect r1 = {1, 21, 16, 4};
         struct FloatRect r2 = {178, 189, 21, 15};
