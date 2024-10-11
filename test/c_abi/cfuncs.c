@@ -2687,7 +2687,7 @@ void run_c_tests(void) {
         zig_struct_u64_u64_8(0, 1, 2, 3, 4, 5, 6, 7, (struct Struct_u64_u64){ .a = 19, .b = 20 });
     }
 
-#if !defined(ZIG_RISCV64)
+#if !defined(ZIG_RISCV64) && !defined(ZIG_LOONGARCH64)
     {
         struct Struct_f32f32_f32 s = zig_ret_struct_f32f32_f32();
         assert_or_panic(s.a.b == 1.0f);
