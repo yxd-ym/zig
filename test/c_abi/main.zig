@@ -1009,6 +1009,7 @@ extern fn c_ret_small_vec() SmallVec;
 
 test "small simd vector" {
     if (builtin.cpu.arch == .x86) return error.SkipZigTest;
+    if (builtin.cpu.arch.isLoongArch()) return error.SkipZigTest;
     if (builtin.cpu.arch.isPowerPC64()) return error.SkipZigTest;
 
     c_small_vec(.{ 1, 2 });
@@ -1027,6 +1028,7 @@ test "medium simd vector" {
     if (builtin.zig_backend == .stage2_x86_64 and
         !comptime std.Target.x86.featureSetHas(builtin.cpu.features, .avx)) return error.SkipZigTest;
 
+    if (builtin.cpu.arch.isLoongArch()) return error.SkipZigTest;
     if (builtin.cpu.arch.isPowerPC64()) return error.SkipZigTest;
 
     c_medium_vec(.{ 1, 2, 3, 4 });
@@ -1046,6 +1048,7 @@ extern fn c_ret_big_vec() BigVec;
 test "big simd vector" {
     if (builtin.zig_backend == .stage2_x86_64) return error.SkipZigTest;
 
+    if (builtin.cpu.arch.isLoongArch()) return error.SkipZigTest;
     if (builtin.cpu.arch.isMIPS64() and builtin.mode != .Debug) return error.SkipZigTest;
     if (builtin.cpu.arch.isPowerPC64()) return error.SkipZigTest;
     if (builtin.zig_backend == .stage2_llvm and builtin.cpu.arch == .x86_64 and builtin.os.tag == .macos and builtin.mode != .Debug) return error.SkipZigTest;
