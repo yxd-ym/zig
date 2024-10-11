@@ -2759,7 +2759,7 @@ void run_c_tests(void) {
     }
 
 #if !defined __i386__ && !defined __arm__ && \
-    !defined ZIG_PPC32 && !defined _ARCH_PPC64
+    !defined ZIG_PPC32 && !defined _ARCH_PPC64 && !defined ZIG_LOONGARCH64
     {
         struct SplitStructInts s = {1234, 100, 1337};
         zig_split_struct_ints(s);

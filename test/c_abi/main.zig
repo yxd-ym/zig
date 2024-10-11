@@ -650,6 +650,7 @@ test "C ABI split struct of ints" {
     if (builtin.cpu.arch == .x86) return error.SkipZigTest;
     if (builtin.cpu.arch.isMIPS64()) return error.SkipZigTest;
     if (builtin.cpu.arch.isPowerPC()) return error.SkipZigTest;
+    if (builtin.cpu.arch.isLoongArch()) return error.SkipZigTest;
 
     const s = SplitStructInt{
         .a = 1234,
