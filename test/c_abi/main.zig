@@ -955,6 +955,7 @@ extern fn c_ret_struct_with_array() StructWithArray;
 
 test "Struct with array as padding." {
     if (builtin.cpu.arch == .x86) return error.SkipZigTest;
+    if (builtin.cpu.arch.isLoongArch()) return error.SkipZigTest;
     if (builtin.cpu.arch.isMIPS64()) return error.SkipZigTest;
     if (builtin.cpu.arch.isPowerPC()) return error.SkipZigTest;
 
