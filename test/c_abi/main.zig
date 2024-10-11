@@ -5713,6 +5713,7 @@ test "Stdcall ABI structs" {
 
 extern fn stdcall_big_union(BigUnion) callconv(stdcall_callconv) void;
 test "Stdcall ABI big union" {
+    if (builtin.cpu.arch.isLoongArch()) return error.SkipZigTest;
     if (builtin.cpu.arch.isPowerPC32()) return error.SkipZigTest;
 
     const x = BigUnion{
@@ -5784,6 +5785,7 @@ const byval_tail_callsite_attr = struct {
 };
 
 test "byval tail callsite attribute" {
+    if (builtin.cpu.arch.isLoongArch()) return error.SkipZigTest;
     if (builtin.cpu.arch.isMIPS64()) return error.SkipZigTest;
     if (builtin.cpu.arch.isPowerPC32()) return error.SkipZigTest;
 
