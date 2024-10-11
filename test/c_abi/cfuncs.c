@@ -2766,7 +2766,8 @@ void run_c_tests(void) {
     }
 #endif
 
-#if !defined __arm__ && !defined ZIG_PPC32 && !defined _ARCH_PPC64
+#if !defined __arm__ && !defined ZIG_PPC32 && !defined _ARCH_PPC64 && \
+    !defined ZIG_LOONGARCH64
     {
         struct MedStructMixed s = {1234, 100.0f, 1337.0f};
         zig_med_struct_mixed(s);
