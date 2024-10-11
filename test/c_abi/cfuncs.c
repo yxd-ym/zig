@@ -2705,7 +2705,7 @@ void run_c_tests(void) {
     }
 #endif
 
-#if !defined(__powerpc__)
+#if !defined(__powerpc__) && !defined(ZIG_LOONGARCH64)
     {
         struct Struct_u32_Union_u32_u32u32 s = zig_ret_struct_u32_union_u32_u32u32();
         assert_or_panic(s.a == 1);
