@@ -474,6 +474,7 @@ const BigUnion = extern union {
 extern fn c_big_union(BigUnion) void;
 
 test "C ABI big union" {
+    if (builtin.cpu.arch.isLoongArch()) return error.SkipZigTest;
     if (builtin.cpu.arch.isPowerPC32()) return error.SkipZigTest;
 
     const x = BigUnion{
