@@ -12047,7 +12047,7 @@ fn firstParamSRet(fn_info: InternPool.Key.FuncType, zcu: *Zcu, target: std.Targe
             .i32_array => |size| size != 1,
             .byval => false,
         },
-        .loongarch64_c_abi => loongarch64_c_abi.classifyType(return_type, zcu) == .memory,
+        .loongarch64_lp64 => loongarch64_c_abi.classifyType(return_type, zcu) == .memory,
         .riscv64_lp64, .riscv32_ilp32 => riscv_c_abi.classifyType(return_type, zcu) == .memory,
         .mips_o32 => switch (mips_c_abi.classifyType(return_type, zcu, .ret)) {
             .memory, .i32_array => true,
