@@ -27,6 +27,7 @@ const aarch64_c_abi = @import("../arch/aarch64/abi.zig");
 const arm_c_abi = @import("../arch/arm/abi.zig");
 const riscv_c_abi = @import("../arch/riscv64/abi.zig");
 const mips_c_abi = @import("../arch/mips/abi.zig");
+const loongarch64_c_abi = @import("../arch/loongarch64/abi.zig");
 const dev = @import("../dev.zig");
 
 const target_util = @import("../target.zig");
@@ -12046,6 +12047,7 @@ fn firstParamSRet(fn_info: InternPool.Key.FuncType, zcu: *Zcu, target: std.Targe
             .i32_array => |size| size != 1,
             .byval => false,
         },
+        .loongarch64_c_abi => loongarch64_c_abi.classifyType(return_type, zcu) == .memory,
         .riscv64_lp64, .riscv32_ilp32 => riscv_c_abi.classifyType(return_type, zcu) == .memory,
         .mips_o32 => switch (mips_c_abi.classifyType(return_type, zcu, .ret)) {
             .memory, .i32_array => true,
@@ -12095,6 +12097,10 @@ fn lowerFnRetTy(o: *Object, fn_info: InternPool.Key.FuncType) Allocator.Error!Bu
             .memory, .i64_array => return .void,
             .i32_array => |len| return if (len == 1) .i32 else .void,
             .byval => return o.lowerType(return_type),
+        },
+        .loongarch64_lp64 => switch (loongarch64_c_abi.classifyType(return_type, zcu)) {
+            .memory => return .void,
+            .byval => return o.lowerType(return_type)
         },
         .mips_o32 => switch (mips_c_abi.classifyType(return_type, zcu, .ret)) {
             .memory, .i32_array => return .void,
@@ -12351,6 +12357,14 @@ const ParamTypeIterator = struct {
                     .byval => return .byval,
                     .i32_array => |size| return Lowering{ .i32_array = size },
                     .i64_array => |size| return Lowering{ .i64_array = size },
+                }
+            },
+            .loongarch64_lp64 => {
+                it.zig_index += 1;
+                it.llvm_index += 1;
+                switch (loongarch64_c_abi.classifyType(ty, zcu)) {
+                    .memory => return .byref_mut,
+                    .byval => return .byval,
                 }
             },
             .mips_o32 => {
